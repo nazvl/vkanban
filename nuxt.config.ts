@@ -12,4 +12,9 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  icon: {
+    clientBundle: {
+      scan: true,
+    },
+  },
 });
