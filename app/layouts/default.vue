@@ -2,7 +2,7 @@
 import type { DropdownMenuItem, NavigationMenuItem } from '@nuxt/ui';
 
 const open = ref(true);
-
+const route = useRoute();
 const colorMode = useColorMode();
 
 function getItems(state: 'collapsed' | 'expanded') {
@@ -101,6 +101,19 @@ const userItems = computed<DropdownMenuItem[][]>(() => [
     },
   ],
 ]);
+
+const PAGE_NAMES: Record<string, string> = {
+  desk: 'Desk',
+  settings: 'Settings',
+  'desk-list': 'Desk List',
+  task: 'Task',
+  card: 'Task',
+};
+
+const pageName = computed(() => {
+  const current = route.path.split('/')[1]?.toLowerCase();
+  return (current && PAGE_NAMES[current]) || 'Back';
+});
 </script>
 
 <template>
@@ -154,7 +167,9 @@ const userItems = computed<DropdownMenuItem[][]>(() => [
     </USidebar>
 
     <div class="flex min-w-0 flex-1 flex-col">
-      <div class="border-default flex h-(--ui-header-height) shrink-0 items-center border-b px-4">
+      <div
+        class="border-default flex h-(--ui-header-height) shrink-0 items-center gap-2 border-b px-4"
+      >
         <UButton
           icon="i-lucide-panel-left"
           color="neutral"
@@ -162,6 +177,14 @@ const userItems = computed<DropdownMenuItem[][]>(() => [
           aria-label="Toggle sidebar"
           @click="open = !open"
         />
+        <UButton
+          v-if="route.path !== '/'"
+          icon="i-lucide-arrow-left"
+          color="neutral"
+          variant="outline"
+          @click="$router.back"
+          >{{ pageName }}</UButton
+        >
       </div>
 
       <div class="flex-1 p-4">

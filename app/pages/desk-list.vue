@@ -27,6 +27,10 @@ const deskList = ref([
 </script>
 
 <template>
+  <div class="flex justify-end py-1">
+    <CustomButton text="Create" />
+  </div>
+
   <UPageList>
     <UPageCard
       v-for="(desk, index) in deskList"
