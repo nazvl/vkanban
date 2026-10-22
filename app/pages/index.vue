@@ -16,7 +16,10 @@ const items: SplitterItem[] = [
   <!--  Графики-->
   <div class="h-[80dvh] w-full">
     <USplitter id="splitter-example" :items="items">
-      <template #left>No data available </template>
+      <template #left
+        ><div class="px-2 py-1">
+          <Timeline /></div
+      ></template>
       <template #right
         ><div class="f-full flex flex-row flex-wrap items-start justify-start px-2 py-2">
           <DonutChart /></div
