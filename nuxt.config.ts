@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   icon: {
+    serverBundle: false,
     clientBundle: {
       scan: true,
     },
