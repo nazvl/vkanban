@@ -168,7 +168,7 @@ const pageName = computed(() => {
 
     <div class="flex min-w-0 flex-1 flex-col">
       <div
-        class="border-default flex h-(--ui-header-height) shrink-0 items-center gap-2 border-b px-4"
+        class="border-default flex h-(--ui-header-height) shrink-0 items-center gap-2 border-b px-4 text-nowrap"
       >
         <UButton
           icon="i-lucide-panel-left"
@@ -185,6 +185,17 @@ const pageName = computed(() => {
           @click="$router.back"
           >{{ pageName }}</UButton
         >
+        <div class="h-min w-full text-right">
+          <a
+            href="https://github.com/nazvl"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="inline-flex items-center justify-center p-1 transition"
+          >
+            <UIcon name="i-simple-icons-github" class="size-6 hover:bg-green-600" />
+          </a>
+        </div>
       </div>
 
       <div class="flex-1 p-4">

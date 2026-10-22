@@ -1,31 +1,49 @@
 <script setup lang="ts">
-import type { SplitterItem } from '@nuxt/ui/components/Splitter.vue';
+import type { SplitterItem } from '@nuxt/ui';
 
 definePageMeta({
   middleware: 'auth',
 });
-const card =
-  'bg-elevated/50 border border-default rounded-xl items-center justify-center text-muted font-medium';
+
+const panel = 'bg-default border border-default rounded-xl shadow-sm overflow-hidden';
+
 const items: SplitterItem[] = [
-  { slot: 'left', minSize: 15, defaultSize: 75, class: card },
-  { slot: 'right', minSize: 15, defaultSize: 25, class: card },
+  { slot: 'left', minSize: 40, defaultSize: 75, class: panel },
+  { slot: 'right', minSize: 15, maxSize: 40, defaultSize: 25, collapsible: true, class: panel },
 ];
 </script>
 
 <template>
-  <!--  Графики-->
-  <div class="h-[80dvh] w-full">
-    <USplitter id="splitter-example" :items="items">
-      <template #left
-        ><div class="min-w-fit px-2 py-1">
-          <Timeline /></div
-      ></template>
-      <template #right
-        ><div class="f-full flex flex-row flex-wrap items-start justify-start px-2 py-2">
-          <DonutChart /></div
-      ></template>
+  <div class="h-[80dvh] w-full p-2">
+    <USplitter
+      id="charts-splitter"
+      auto-save-id="charts-splitter"
+      :items="items"
+      :ui="{ handle: 'mx-1 rounded-full bg-border hover:bg-primary transition-colors' }"
+    >
+      <template #left>
+        <div class="flex h-full w-full flex-col">
+          <div class="border-default flex items-center gap-2 border-b px-4 py-3">
+            <UIcon name="i-lucide-clock" class="text-primary size-5" />
+            <h2 class="text-highlighted font-semibold">Project life</h2>
+          </div>
+          <div class="flex-1 overflow-auto p-4">
+            <Timeline />
+          </div>
+        </div>
+      </template>
+
+      <template #right>
+        <div class="flex h-full w-full flex-col">
+          <div class="border-default flex items-center gap-2 border-b px-4 py-3">
+            <UIcon name="i-lucide-chart-pie" class="text-primary size-5" />
+            <h2 class="text-highlighted font-semibold">Graphics</h2>
+          </div>
+          <div class="flex flex-1 items-center justify-center overflow-auto p-4">
+            <DonutChart />
+          </div>
+        </div>
+      </template>
     </USplitter>
   </div>
 </template>
-
-<style scoped></style>
