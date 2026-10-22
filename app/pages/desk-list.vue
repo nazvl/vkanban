@@ -6,47 +6,53 @@ const deskList = ref([
     name: 'Storage',
     description: 'Project about storages',
     owner: 'Benjamin Canac',
-    avatar: {
-      src: 'https://img.magnific.com/free-photo/warehouse-with-boxes-delivery-van_23-2151998657.jpg?semt=ais_hybrid&w=740&q=80',
-      alt: '',
-      loading: 'lazy' as const,
-    },
   },
-
   {
     id: 1,
     name: 'Laboratory',
     description: 'Laboratory',
-    avatar: {
-      src: 'https://png.pngtree.com/thumb_back/fh260/background/20240801/pngtree-laboratory-equipment-and-microscope-on-table-in-lab-setting-image_16123343.jpg',
-      alt: '',
-      loading: 'lazy' as const,
-    },
+  },
+  {
+    id: 2,
+    name: 'Bugs',
+    description: 'Bug reports from production',
+  },
+  {
+    id: 3,
+    name: 'Bugs Testers',
+    description: 'Bug reports from QA',
+    owner: 'Alguen Tester',
   },
 ]);
 </script>
 
 <template>
-  <div class="flex justify-end py-1">
+  <div class="flex items-center justify-between py-4">
+    <div>
+      <h1 class="text-highlighted text-2xl font-semibold">Desks</h1>
+      <p class="text-muted text-sm">{{ deskList.length }} projects</p>
+    </div>
     <CustomButton text="Create" />
   </div>
 
-  <UPageList>
+  <UPageGrid class="lg:grid-cols-2 xl:grid-cols-3">
     <UPageCard
-      v-for="(desk, index) in deskList"
-      :key="index"
-      variant="ghost"
-      :to="'/desk/' + desk.id"
+      v-for="desk in deskList"
+      :key="desk.id"
+      variant="subtle"
+      :to="`/desk/${desk.id}`"
+      icon="i-lucide-layout-dashboard"
+      :title="desk.name"
+      :description="desk.description"
+      spotlight
+      spotlight-color="primary"
     >
-      <template #body>
-        <UUser
-          :name="desk.name"
-          :description="desk.description"
-          :avatar="desk.avatar"
-          size="xl"
-          class="relative"
-        />
+      <template #footer>
+        <div class="flex w-full items-center justify-between">
+          <UUser v-if="desk.owner" :name="desk.owner" size="sm" :avatar="{ alt: desk.owner }" />
+          <span v-else class="text-muted text-sm">No owner</span>
+        </div>
       </template>
     </UPageCard>
-  </UPageList>
+  </UPageGrid>
 </template>

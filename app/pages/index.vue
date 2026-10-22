@@ -17,7 +17,7 @@ const items: SplitterItem[] = [
   <div class="h-[80dvh] w-full">
     <USplitter id="splitter-example" :items="items">
       <template #left
-        ><div class="px-2 py-1">
+        ><div class="min-w-fit px-2 py-1">
           <Timeline /></div
       ></template>
       <template #right
