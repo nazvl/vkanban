@@ -26,9 +26,6 @@ const deskList = ref([
 ]);
 // Проверяем сенсорный ли экран
 const touchableScreen = ref<boolean>(false);
-const isMobile = computed(() => {
-  return touchableScreen.value;
-});
 
 onMounted(() => {
   touchableScreen.value = 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 0;
@@ -53,7 +50,7 @@ onMounted(() => {
       icon="i-lucide-layout-dashboard"
       :title="desk.name"
       :description="desk.description"
-      :spotlight="!isMobile"
+      :spotlight="!touchableScreen"
       spotlight-color="primary"
     >
       <template #footer>
